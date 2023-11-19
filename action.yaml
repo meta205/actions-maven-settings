@@ -1,0 +1,38 @@
+name: 'GitHub Action to create Maven Settings'
+description: 'This is a GitHub Action to create Maven Settings. (npm settings are also applied)'
+
+branding:
+  icon: package
+  color: blue
+
+inputs:
+  owner:
+    description: The owner of github
+    required: false
+  repo:
+    description: The id of the repository
+    required: false
+  release-enabled:
+    description: The release enabled of the repository
+    required: false
+    default: 'true'
+  release-update-policy:
+    description: The release update-policy of the repository
+    required: false
+  snapshots-enabled:
+    description: The snapshots enabled of the repository
+    required: false
+    default: 'true'
+  snapshots-update-policy:
+    description: The snapshots update-policy of the repository
+    required: false
+  username:
+    description: The username of the server (GitHub username)
+    required: false
+  password:
+    description: The password of the server (GitHub personal access token)
+    required: false
+
+runs:
+  using: node16
+  main: dist/index.js

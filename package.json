@@ -1,0 +1,30 @@
+{
+  "name": "actions-delete-package",
+  "version": "1.0.0",
+  "description": "GitHub Action to set up Maven GitHub Package",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build ./src/index.ts -o dist --license licenses.txt",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meta205/actions-maven-settings.git"
+  },
+  "keywords": [
+    "actions-maven-settings"
+  ],
+  "author": "Kyongho Lee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meta205/actions-maven-settings/issues"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.2",
+    "typescript": "^4.8.3"
+  }
+}
