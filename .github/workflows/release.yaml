@@ -1,0 +1,25 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get release info
+        run: |
+          echo "tag-name=v$(cat package.json | jq '.version|split(".")[0]|tonumber')" >> $GITHUB_OUTPUT
+          echo "release-name=v$(cat package.json | jq '.version|split(".")[0]|tonumber')" >> $GITHUB_OUTPUT
+        id: release-info
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.release-info.outputs.tag-name }}
+          release_name: ${{ steps.release-info.outputs.release-name }}
+          body: ${{ steps.release-info.outputs.release-name }} Release
