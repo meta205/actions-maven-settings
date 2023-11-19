@@ -1,5 +1,5 @@
 {
-  "name": "actions-delete-package",
+  "name": "actions-maven-settings",
   "version": "1.0.0",
   "description": "GitHub Action to set up Maven GitHub Package",
   "main": "index.js",
