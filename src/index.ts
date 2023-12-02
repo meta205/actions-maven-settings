@@ -4,7 +4,29 @@ import * as path from 'path';
 import {js2xml} from 'xml-js';
 import * as core from '@actions/core';
 
-type MavenSettings = {settings: {_attributes: {xmlns: string, "xmlns:xsi": string, "xsi:schemaLocation": string}, activeProfiles: {activeProfile: string}, profiles: {profile: {id: string, repositories: {repository: {}[]}}}, servers: {server: {}[]}}};
+type MavenSettings = {
+  settings: {
+    _attributes: {
+      xmlns: string,
+      "xmlns:xsi": string,
+      "xsi:schemaLocation": string
+    },
+    activeProfiles: {
+      activeProfile: string
+    },
+    profiles: {
+      profile: {
+        id: string,
+        repositories: {
+          repository: {}[]
+        }
+      }
+    },
+    servers: {
+      server: {}[]
+    }
+  }
+};
 
 const mavenTemplateObj: MavenSettings = {
   settings: {
@@ -50,16 +72,22 @@ const mavenTemplateObj: MavenSettings = {
 
     if (!owner || !repo) {
       const repoInfo: string[] = process.env.GITHUB_REPOSITORY!.split('/');
-      owner = repoInfo[0];
-      repo = repoInfo[1];
+
+      if (!owner) {
+        owner = repoInfo[0];
+      }
+
+      if (!repo) {
+        repo = repoInfo[1];
+      }
     }
 
     const name: string = repo;
     const url: string = `https://maven.pkg.github.com/${owner}/${repo}`;
-    const releaseEnabled: boolean = core.getInput('release-enabled') === 'true';
-    const releaseUpdatePolicy: string = core.getInput('release-update-policy') || 'always';
-    const snapshotsEnabled: boolean = core.getInput('snapshots-enabled') === 'true';
-    const snapshotsUpdatePolicy: string = core.getInput('snapshots-update-policy') || 'always';
+    const releaseEnabled: boolean = core.getInput('release-enabled') !== 'false';
+    const releaseUpdatePolicy: string = core.getInput('release-update-policy') || 'daily';
+    const snapshotsEnabled: boolean = core.getInput('snapshots-enabled') !== 'false';
+    const snapshotsUpdatePolicy: string = core.getInput('snapshots-update-policy') || 'daily';
 
     const serverId: string = repo;
     const serverUsername: string = core.getInput('username');

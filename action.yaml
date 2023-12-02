@@ -15,17 +15,19 @@ inputs:
   release-enabled:
     description: The release enabled of the repository
     required: false
-    default: 'true'
+    default: 'false'
   release-update-policy:
-    description: The release update-policy of the repository
+    description: The release update-policy of the repository (always, never, daily, interval:XXX)
     required: false
+    default: 'daily'
   snapshots-enabled:
     description: The snapshots enabled of the repository
     required: false
-    default: 'true'
+    default: 'false'
   snapshots-update-policy:
-    description: The snapshots update-policy of the repository
+    description: The snapshots update-policy of the repository (always, never, daily, interval:XXX)
     required: false
+    default: 'daily'
   username:
     description: The username of the server (GitHub username)
     required: false

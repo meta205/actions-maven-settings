@@ -26759,10 +26759,10 @@ const mavenTemplateObj = {
         }
         const name = repo;
         const url = `https://maven.pkg.github.com/${owner}/${repo}`;
-        const releaseEnabled = core.getInput('release-enabled') === 'true';
-        const releaseUpdatePolicy = core.getInput('release-update-policy') || 'always';
-        const snapshotsEnabled = core.getInput('snapshots-enabled') === 'true';
-        const snapshotsUpdatePolicy = core.getInput('snapshots-update-policy') || 'always';
+        const releaseEnabled = core.getInput('release-enabled') !== 'false';
+        const releaseUpdatePolicy = core.getInput('release-update-policy') || 'daily';
+        const snapshotsEnabled = core.getInput('snapshots-enabled') !== 'false';
+        const snapshotsUpdatePolicy = core.getInput('snapshots-update-policy') || 'daily';
         const serverId = repo;
         const serverUsername = core.getInput('username');
         const serverPassword = core.getInput('password');
